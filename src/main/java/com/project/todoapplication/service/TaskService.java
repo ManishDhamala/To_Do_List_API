@@ -5,6 +5,7 @@ import com.project.todoapplication.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -32,6 +33,19 @@ public class TaskService {
     public List<Task>findAllUncompletedTask() {
         return  taskRepo.findByCompletedFalse();
     }
+
+    public List<Task> findTaskByStartDate(LocalDate startDate){
+        return  taskRepo.findByStartDate(startDate);
+    }
+
+    public List<Task> findTaskByEndDate(LocalDate endDate){
+        return  taskRepo.findByEndDate(endDate);
+    }
+
+    public List<Task> findTaskByStartDateAndEndDate(LocalDate startDate, LocalDate endDate){
+        return  taskRepo.findByStartDateAndEndDate(startDate, endDate);
+    }
+
 
     public Task UpdateTask(Task task) {
         return taskRepo.save(task);

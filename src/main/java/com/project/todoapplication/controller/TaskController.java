@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -35,6 +36,21 @@ public class TaskController {
     @GetMapping("/uncompleted")
     public ResponseEntity<List<Task>> getAllUncompletedTasks() {
         return ResponseEntity.ok(taskService.findAllUncompletedTask());
+    }
+
+    @GetMapping("/start-date")
+    public ResponseEntity<List<Task>> getTasksByStartDate(@RequestParam LocalDate startDate) {
+        return ResponseEntity.ok(taskService.findTaskByStartDate(startDate));
+    }
+
+    @GetMapping("/end-date")
+    public ResponseEntity<List<Task>> getTasksByEndDate(@RequestParam LocalDate endDate) {
+        return ResponseEntity.ok(taskService.findTaskByEndDate(endDate));
+    }
+
+    @GetMapping("/date-range")
+    public ResponseEntity<List<Task>> getTasksByDateRange(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate) {
+        return  ResponseEntity.ok(taskService.findTaskByStartDateAndEndDate(startDate,endDate));
     }
 
     @PostMapping("/")
